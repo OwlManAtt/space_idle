@@ -1,0 +1,48 @@
+{
+  "name": "owlmanatt/space_idle",
+  "description": "A multiplayer iterative game. In space.",
+  "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Nicholas 'owlmanatt' Evans",
+      "email": "owlmanatt@gmail.com",
+      "role": "Developer" 
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "SpaceIdle\\": "module/SpaceIdle/src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SpaceIdleTest\\": "module/SpaceIdle/test/"
+    }
+  },
+
+
+  "require": {
+    "php": "^7.0",
+    "zendframework/zendframework": "^3.0",
+    "zendframework/zend-component-installer": "^1.0 || ^0.3 || ^1.0.0-dev@dev",
+    "zfcampus/zf-development-mode": "^3.0"
+  },
+  
+  "scripts": {
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "development-disable": "zf-development-mode disable",
+    "development-enable": "zf-development-mode enable",
+    "development-status": "zf-development-mode status",
+    "test": "phpunit"
+  },
+
+  "require-dev": {
+    "zendframework/zend-test": "^3.0",
+    "zendframework/zend-developer-tools": "^1.1.0",
+    "squizlabs/php_codesniffer": "^2.8"
+  }
+}
