@@ -35,5 +35,9 @@ if (file_exists(__DIR__ . '/../config/development.config.php')) {
     $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
 }
 
+// Set up DB adpater
+// $adapter = new Zend\Db\Adapter\Adapter($appConfig['db_dsn']);
+
+
 // Run the application!
 Application::init($appConfig)->run();

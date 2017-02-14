@@ -2,6 +2,7 @@
 return [
   // Additional modules to include when in development mode
   'modules' => [
+      'Zend\Db',
       'ZendDeveloperTools',
   ],
   // Configuration overrides during development mode

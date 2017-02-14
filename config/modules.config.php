@@ -7,5 +7,6 @@
 return [
   'Zend\Router',
   'Zend\Validator',
+  'Zend\Db',
   'SpaceIdle',
 ];

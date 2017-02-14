@@ -9,4 +9,11 @@ return [
     'config_cache_enabled' => false,
     'module_map_cache_enabled' => false,
   ],
+  'db_dsn' => [
+    'driver' => 'pdo_pgsql',
+    'database' => 'game',
+    'username' => 'game',
+    'password' => '1dl3rpgm3',
+    'hostname' => 'localhost',
+  ],
 ];

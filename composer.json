@@ -28,7 +28,8 @@
     "php": "^7.0",
     "zendframework/zendframework": "^3.0",
     "zendframework/zend-component-installer": "^1.0 || ^0.3 || ^1.0.0-dev@dev",
-    "zfcampus/zf-development-mode": "^3.0"
+    "zfcampus/zf-development-mode": "^3.0",
+    "zendframework/zend-db": "^2.8"
   },
   
   "scripts": {
