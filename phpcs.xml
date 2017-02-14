@@ -24,14 +24,12 @@
   <rule ref="PSR1.Files.SideEffects">
     <exclude-pattern>public/index.php</exclude-pattern>
   </rule>
-  <rule ref="Generic.WhiteSpace.ScopeIndent">
-    <properties>
-      <property name="indent" value="2"/>
-    </properties>
-  </rule>
 
   <!-- Paths to check -->
-  <file>config</file>
-  <file>module</file>
+  <file>app/</file>
+  <file>config/</file>
+  <file>database/</file>
+  <file>routes/</file>
+  <file>tests/</file>
   <file>public/index.php</file>
 </ruleset>
