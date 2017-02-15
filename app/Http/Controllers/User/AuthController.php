@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\User;
 
-use Socialite;
 use Illuminate\Http\Request; 
 use App\Http\Controllers\Controller;
 use App\AuthenticateUser;
@@ -10,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     const SUPPORTED_PROVIDERS = ['google'];
-
+    
     /**
      * Redirect the user to their OAuth provider's consent screen, if needful. 
      *
@@ -25,10 +24,15 @@ class AuthController extends Controller
 
         return $authenticateUser->execute($request->all(), $this, $provider); 
     } // end redirectToProvider
-  
+
     public function userHasLoggedIn($user) 
     {
         Session::flash('message', 'Welcome, ' . $user->display_name);
         return redirect('/');
     } // end userHasLoggedIn
+
+    public function getSuspended()
+    {
+        return view('user.auth.suspended');
+    } // end getSuspended
 } // end AuthController

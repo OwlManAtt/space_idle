@@ -36,6 +36,12 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'authed_checks' => [
+            'auth',
+            'redirectIfBanned',
+            'newUserRegistration',
+        ],
+
         'api' => [
             'throttle:60,1',
             'bindings',
@@ -56,5 +62,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'redirectIfBanned' => \App\Http\Middleware\RedirectIfBanned::class,
+        'newUserRegistration' => \App\Http\Middleware\NewUserRegistration::class,
     ];
 }

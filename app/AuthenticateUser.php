@@ -1,11 +1,11 @@
 <?php
 namespace App;
 
-// use IlluminateContractsAuthGuard; 
 use Illuminate\Contracts\Auth\Guard;
 use Socialite;
 use Request;
 use App\Models\User;
+use App\Repositories\UserRepository;
 
 class AuthenticateUser 
 {
@@ -24,7 +24,7 @@ class AuthenticateUser
             return $this->getAuthorizationFirst($provider);
         }
 
-        $user = User::findByUsernameOrCreate($provider, $this->getSocialUser($provider));
+        $user = UserRepository::findByUsernameOrCreate($provider, $this->getSocialUser($provider));
         $this->auth->login($user, true);
 
         return $listener->userHasLoggedIn($user);

@@ -18,9 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('provider');
             $table->string('provider_id');
             $table->string('display_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('avatar');
-            $table->boolean('banned');
+            $table->boolean('banned')->default('0');
+            $table->boolean('signup_complete')->default('0');
             $table->timestamps();
             $table->rememberToken();
 

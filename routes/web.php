@@ -11,9 +11,24 @@
 |
 */
 
+// Unauthenticated pages
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('user/login/{provider?}', 'User\AuthController@redirectToProvider');
-Route::get('user/login/{provider?}/callback', 'User\AuthController@redirectToProvider');
+Route::get('user/login/{provider}', 'User\AuthController@redirectToProvider');
+Route::get('user/login/{provider}/callback', 'User\AuthController@redirectToProvider');
+
+// Special pages that should not have the extra checks (ex redir to suspended page)
+// because they would cause a redirect loop or other unfortunate behaviour.
+Route::get('user/register', 'User\ProfileController@getRegister');
+Route::post('user/register', 'User\ProfileController@postRegister');
+
+Route::get('/user/suspended', 'User\AuthController@getSuspended');
+
+// Normal routes.
+Route::group(['middleware' => ['authed_checks']], function()
+{
+    Route::get('/test', function () { return view('test'); });
+
+});
