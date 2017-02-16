@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    // Socialite is a bit daft & lets you specify an unconfigured driver.
+    // @TODO cleaner way to handle this
     const SUPPORTED_PROVIDERS = ['google'];
     
     /**
@@ -31,8 +33,19 @@ class AuthController extends Controller
         return redirect('/');
     } // end userHasLoggedIn
 
+    public function userHasLoggedOut()
+    {
+        Session::flash('message', 'You have been logged out.');
+        return redirect('/');
+    }
+
     public function getSuspended()
     {
         return view('user.auth.suspended');
     } // end getSuspended
+
+    public function logoff(AuthenticateUser $authenticateUser)
+    {
+        return $authenticateUser->endSession($this); 
+    } // end logoff
 } // end AuthController

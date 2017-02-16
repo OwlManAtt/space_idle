@@ -2,8 +2,28 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
-// Variables
-@import "variables";
 
-// Bootstrap
+// Variables
+// @import "variables";
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "slate/variables";
+
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "slate/bootswatch";
+
+@import "parallax_star";
+
+.img-nav-avatar {
+    max-height: 15px;
+}
+
+footer li {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+footer p {
+    clear: left;
+    margin-bottom: 0;
+}

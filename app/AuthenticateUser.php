@@ -30,6 +30,13 @@ class AuthenticateUser
         return $listener->userHasLoggedIn($user);
     } // end execute
 
+    public function endSession($listener) 
+    {
+        $this->auth->logout();
+
+        return $listener->userHasLoggedOut();
+    } // end endSession
+
     private function getAuthorizationFirst($provider) 
     {
         return Socialite::driver($provider)->redirect();
