@@ -8,4 +8,13 @@ class User extends Authenticatable
 {
     protected $fillable = ['display_name', 'avatar',];
 
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    } // end resources
+
+    public function homepage()
+    {
+        return '/harvest';
+    }
 } // end User

@@ -2,7 +2,9 @@
 namespace App\Repositories;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\ResourceRepository;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository extends BaseRepository 
 {
@@ -20,17 +22,31 @@ class UserRepository extends BaseRepository
         $user = User::where('provider_id', '=', $userData->id)->where('provider', '=', $provider)->first();
         if ($user == null)
         {
+            $user = self::createNewUser($provider, $userData);
+        } // not found
+
+        return self::checkIfUserNeedsUpdating($userData, $user);
+    } // end findByUserNameOrCreate
+
+    public static function createNewUser($provider, $userData)
+    {
+        // New users start with the basic resources.
+        $basics = ResourceRepository::getInitialResources();
+        
+        return DB::transaction(function() use ($provider, $userData, $basics) {
             $user = new User();
             $user->provider = $provider;
             $user->provider_id = $userData->id;
             $user->display_name = $userData->nickname ?? $userData->name ?? 'Beautiful User';
             $user->email = $userData->email;
             $user->avatar = $userData->avatar;
+            
             $user->save();
-        } // not found
-
-        return self::checkIfUserNeedsUpdating($userData, $user);
-    } // end findByUserNameOrCreate
+            $user->resources()->saveMany($basics);
+            
+            return $user; 
+        });
+    } // end createNewUser
 
     public static function checkIfUserNeedsUpdating($userData, $user)
     {

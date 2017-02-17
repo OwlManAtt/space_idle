@@ -34,6 +34,5 @@ Route::get('/user/suspended', 'User\AuthController@getSuspended');
 // Normal routes.
 Route::group(['middleware' => ['authed_checks']], function()
 {
-    Route::get('/harvest', function () { return view('harvest.overview'); });
-
+    Route::get('/harvest', 'HarvestController@getOverview');
 });

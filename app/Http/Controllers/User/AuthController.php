@@ -30,7 +30,7 @@ class AuthController extends Controller
     public function userHasLoggedIn($user) 
     {
         Session::flash('message', 'Welcome, ' . $user->display_name);
-        return redirect('/');
+        return redirect($user->homepage());
     } // end userHasLoggedIn
 
     public function userHasLoggedOut()

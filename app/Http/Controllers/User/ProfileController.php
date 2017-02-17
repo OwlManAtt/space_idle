@@ -16,6 +16,6 @@ class ProfileController extends Controller
     {
         UserRepository::updateProfile($request->all(), $request->user());
         
-        return redirect('/');
+        return redirect($request->user()->homepage());
     } // end postRegister
 } // end ProfileController
