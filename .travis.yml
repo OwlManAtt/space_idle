@@ -1,4 +1,7 @@
 language: php
+services:
+    - postgresql
+
 cache:
     directories:
         - $HOME/.composer/cache
@@ -14,6 +17,10 @@ before_install:
 install: 
     - travis_retry composer install --dev --no-interaction 
     - composer show 
+
+before-script:
+    - psql -c 'create database space_idle_test;' -U postgres
+    - cp .travis.env .env
 
 script: 
     - composer cs-check
