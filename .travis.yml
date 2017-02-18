@@ -27,4 +27,4 @@ script:
 notification:
     irc:
         channels:
-            - "ircs://irc.yasashiisyndicate.org:6697/#space-idle
+            - ircs://irc.yasashiisyndicate.org:6697/#space-idle
