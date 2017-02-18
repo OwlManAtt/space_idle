@@ -25,6 +25,5 @@ script:
     - composer test 
 
 notification:
-    irc:
-        channels:
-            - ircs://irc.yasashiisyndicate.org:6697/#space-idle
+    email: false
+    irc: "ircs://irc.yasashiisyndicate.org:6697/#space-idle"
