@@ -15,8 +15,7 @@ class UserTest extends TestCase
 
     private function getSocialiteUser()
     {
-        return m::mock('StdClass', function($mock) 
-        {
+        return m::mock('StdClass', function ($mock) {
             $mock->id = '12345';
             $mock->nickname = null;
             $mock->name = 'Owls';
