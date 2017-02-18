@@ -24,6 +24,14 @@
   <rule ref="PSR1.Files.SideEffects">
     <exclude-pattern>public/index.php</exclude-pattern>
   </rule>
+  <rule ref="PSR1.Classes.ClassDeclaration">
+    <!-- DB migs / seeds don't follow this rule. -->
+    <exclude-pattern>database/</exclude-pattern>
+  </rule>
+  <rule ref="Generic.Files.LineLength">
+    <!-- Seeds can have long lines by their nature -->
+    <exclude-pattern>database/seeds/</exclude-pattern>
+  </rule>
 
   <!-- Paths to check -->
   <file>app/</file>

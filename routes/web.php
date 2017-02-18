@@ -12,12 +12,15 @@
 */
 
 // Unauthenticated pages
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Disallow if authed
-Route::group(['middleware' => ['guest']], function() 
-{
-    Route::get('/login', function() { return view('user.login'); });
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/login', function () {
+        return view('user.login');
+    });
 });
 
 Route::get('user/login/{provider}', 'User\AuthController@redirectToProvider');
@@ -32,7 +35,6 @@ Route::post('user/register', 'User\ProfileController@postRegister');
 Route::get('/user/suspended', 'User\AuthController@getSuspended');
 
 // Normal routes.
-Route::group(['middleware' => ['authed_checks']], function()
-{
+Route::group(['middleware' => ['authed_checks']], function () {
     Route::get('/harvest', 'HarvestController@getOverview');
 });

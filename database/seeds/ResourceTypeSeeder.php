@@ -49,7 +49,7 @@ class ResourceTypeSeeder extends LookupSeeder
                 'basic' => true,
             ],
         ];
-        
+
         return $this->seedLookup('resource_types', $resource_types);
     } // end run
 }

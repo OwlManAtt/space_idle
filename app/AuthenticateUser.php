@@ -7,7 +7,7 @@ use Request;
 use App\Models\User;
 use App\Repositories\UserRepository;
 
-class AuthenticateUser 
+class AuthenticateUser
 {
     private $auth;
     private $user_model;
@@ -19,8 +19,7 @@ class AuthenticateUser
 
     public function execute($request, $listener, $provider)
     {
-        if($request == false)
-        {
+        if ($request == false) {
             return $this->getAuthorizationFirst($provider);
         }
 
@@ -30,14 +29,14 @@ class AuthenticateUser
         return $listener->userHasLoggedIn($user);
     } // end execute
 
-    public function endSession($listener) 
+    public function endSession($listener)
     {
         $this->auth->logout();
 
         return $listener->userHasLoggedOut();
     } // end endSession
 
-    private function getAuthorizationFirst($provider) 
+    private function getAuthorizationFirst($provider)
     {
         return Socialite::driver($provider)->redirect();
     } // end getAuthorizationFirst

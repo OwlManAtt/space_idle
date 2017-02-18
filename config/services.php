@@ -37,10 +37,10 @@ return [
     ],
      */
     'google' => [
-        'client_id' => env('OAUTH_GOOGLE_CLIENTID'), 
-        'client_secret' => env('OAUTH_GOOGLE_SECRET'), 
+        'client_id' => env('OAUTH_GOOGLE_CLIENTID'),
+        'client_secret' => env('OAUTH_GOOGLE_SECRET'),
         'redirect' => 'https://chi.godless-internets.org/user/login/google/callback',
-    ], 
+    ],
     /*
     'facebook' => [
         'client_id' => 'your-github-app-id',

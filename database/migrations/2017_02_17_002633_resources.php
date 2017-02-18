@@ -39,7 +39,7 @@ class Resources extends Migration
 
         Artisan::call('db:seed', [
             '--class' => 'ResourceTypeSeeder',
-            '--force' => true 
+            '--force' => true
         ]);
     } // end up
 

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     /**
-     * No mass-assign guard on this -- I have no intention 
+     * No mass-assign guard on this -- I have no intention
      * to use form data to populate data for Resource, ever.
      */
     protected $guarded = [];
     protected $with = ['type'];
     public $timestamps = false;
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class);
     } // end user

@@ -8,12 +8,10 @@ class NewUserRegistration
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->signup_complete == false)
-        {
+        if ($request->user()->signup_complete == false) {
             return redirect('/user/register');
         }
 
         return $next($request);
     } // end handle
-
 } // end NewUserRegistration

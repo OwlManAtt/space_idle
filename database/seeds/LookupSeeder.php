@@ -14,12 +14,11 @@ abstract class LookupSeeder extends Seeder
 
     protected function seedLookup($table, $seeds)
     {
-        foreach ($seeds as $id => $seed)
-        {
+        foreach ($seeds as $id => $seed) {
             $this->updateOrInsert($table, $id, $seed);
         }
-        
-        return null; 
+
+        return null;
     } // end seedLookup
 
     /**
@@ -27,20 +26,18 @@ abstract class LookupSeeder extends Seeder
      *
      * @param integer PK for `id` column
      * @param array Hash of col->value. `id` will be added for inserts if it is not present.
-     * @return bool 
+     * @return bool
      */
     protected function updateOrInsert($table, $id, $row)
     {
         $query = DB::table($table);
-        
+
         $exists = DB::table($table)->where('id', '=', $id)->first();
-        if ($exists == null)
-        {
+        if ($exists == null) {
             $row['id'] = $id;
             return $query->insert($row);
         }
-        
-        return $query->where('id', '=', $id)->update($row);
-    } // end updateOrInsert 
 
+        return $query->where('id', '=', $id)->update($row);
+    } // end updateOrInsert
 } // end LookupSeeder

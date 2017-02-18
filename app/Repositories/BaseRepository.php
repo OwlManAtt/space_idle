@@ -1,13 +1,12 @@
 <?php
 namespace App\Repositories;
 
-class BaseRepository 
+class BaseRepository
 {
    /**
      * The Model instance.
      *
      * @var Illuminate\Database\Eloquent\Model
      */
-    protected $model; 
-
+    protected $model;
 } // end BaseRepository
