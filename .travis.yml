@@ -24,6 +24,6 @@ script:
     - composer cs-check
     - composer test 
 
-notification:
+notifications:
     email: false
     irc: "ircs://irc.yasashiisyndicate.org:6697/#space-idle"
