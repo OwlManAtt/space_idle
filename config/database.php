@@ -44,6 +44,19 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+
+        'testing' => [
+            'driver' => 'pgsql',
+            'host' => env('TEST_DB_HOST', '127.0.0.1'),
+            'port' => env('TEST_DB_PORT', '5432'),
+            'database' => env('TEST_DB_DATABASE', 'game_test'),
+            'username' => env('TEST_DB_USERNAME', 'game'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
     ],
 
     /*
