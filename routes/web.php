@@ -34,8 +34,12 @@ Route::post('user/register', 'User\ProfileController@postRegister');
 
 Route::get('/user/suspended', 'User\AuthController@getSuspended');
 
-// Normal routes.
-Route::group(['middleware' => ['authed_checks']], function () {
-    Route::get('/harvest', 'HarvestController@getOverview');
-    Route::post('/harvest/resource', 'HarvestController@postHarvest');
+// Routes per controller so we can detect which is active for the menu
+Route::group(['prefix' => 'harvest', 'middleware' => ['authed_checks']], function () {
+    Route::get('/', 'HarvestController@getOverview');
+    Route::post('/resource', 'HarvestController@postHarvest');
+});
+
+Route::group(['prefix' => 'station', 'middleware' => ['authed_checks']], function () {
+    Route::get('/research', 'StationController@getResearch');
 });

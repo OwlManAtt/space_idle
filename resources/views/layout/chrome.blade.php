@@ -29,24 +29,24 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown active">
+                            <li class="dropdown{{ $active_menu == '/station' ? ' active' : '' }}">
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Station <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Construction</a></li>
-                                    <li><a href="#">Research Lab</a></li>
+                                    <li><a href="/station/research">Research Lab</a></li>
                                     <li><a href="#">Docking Bays</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/harvest">Harvesting</a></li>
-                            <li><a href="#">Politics</a></li>
-                            <li class="dropdown">
+                            <li{!! $active_menu == '/harvest' ? ' class="active"' : '' !!}><a href="/harvest">Harvesting</a></li>
+                            <li{!! $active_menu == '/politics' ? ' class="active"' : '' !!}><a href="#">Politics</a></li>
+                            <li class="dropdown{{ $active_menu == '/messages' ? ' active' : '' }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages <span class='badge'>1,233</span> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Notifications <span class='badge'>2</span></a></li>
                                     <li><a href="#">Mail <span class='badge'>1,231</span></a></li>
                                 </ul>
                             </li>
-                            <li><a href='#'>Forums</a></li>
+                            <li{!! $active_menu == '/forum' ? ' class="active"' : '' !!}><a href='#'>Forums</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
