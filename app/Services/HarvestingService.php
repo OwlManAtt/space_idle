@@ -18,7 +18,7 @@ class HarvestingService
         $now = $now ?? Carbon::now();
 
         for ($i = 0; $i < sizeof($resources); $i++) {
-            $resources[$i]->quantity = $resources[$i]->getProjectedHarvestAmount($now);
+            $resources[$i]->quantity += $resources[$i]->getProjectedHarvestAmount($now);
             $resources[$i]->penultimate_harvested_at = $resources[$i]->last_harvested_at;
             $resources[$i]->last_harvested_at = $now;
         }

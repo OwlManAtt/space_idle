@@ -4,16 +4,10 @@ namespace Tests\Unit;
 
 use Mockery as m;
 use App\Models\Resource;
-use App\Models\ResourceType;
-use Tests\TestCase;
 use \Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ResourceTest extends TestCase
+class ResourceTest extends ResourceBaseHelper 
 {
-    use DatabaseMigrations;
-
     public function testHarvestablePeriods()
     {
         $now = Carbon::now();
@@ -48,48 +42,4 @@ class ResourceTest extends TestCase
         $this->assertEquals(true, $resource->isHarvestable($now));
     } // end testIsHarvestable
 
-    private function mockResource($values = [])
-    {
-        $now = Carbon::now();
-
-        $values = array_merge([
-            'type' => $this->mockResourceType(),
-            'quantity' => 5,
-            'last_harvested_at' => $now,
-            'penultimate_harvested_at' => $now,
-        ], $values);
-        // print_r($values);
-
-        return new Resource($values);
-    } // end mockResource
-
-    private function mockResourceType($short_code = 'ore')
-    {
-        // Migration loads seeds for this table
-        return ResourceType::where('short_code', $short_code)->first();
-    }
-
-    /*
-    public function testRegistration()
-    {
-        $provider = 'testProvider';
-        $userData = $this->getSocialiteUser();
-
-        $user = UserRepository::findByUsernameOrCreate($provider, $userData);
-        $this->assertInstanceOf(\App\Models\User::class, $user);
-
-        $registered_user_id = $user->id;
-
-        $user = UserRepository::findByUsernameOrCreate($provider, $userData);
-        $this->assertEquals($registered_user_id, $user->id);
-    } // end testRegistration
-
-    public function testRegistrationCreatesResources()
-    {
-        $userData = $this->getSocialiteUser();
-        $user = UserRepository::findByUsernameOrCreate('testProvider', $userData);
-
-        $this->assertGreaterThan(0, sizeof($user->resources()->get()));
-    } // end signupCreatesResources
-     */
 } // end UserTest
