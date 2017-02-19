@@ -12,6 +12,7 @@ class Resource extends Model
      */
     protected $guarded = [];
     protected $with = ['type'];
+    protected $dates = ['last_harvested_at', 'penultimate_harvested_at',];
     public $timestamps = false;
     const MAX_PERIODS = 96; // @TODO: stupid place for this
 
@@ -27,12 +28,12 @@ class Resource extends Model
 
     public function isHarvestable($now = null)
     {
-        return $this->getHarvestablePeriods($now, $this->getLastHarvestedAt()) > 0;
+        return $this->getHarvestablePeriods($now) > 0;
     } // end isHarvestable
 
     public function getProjectedHarvestAmount($now = null)
     {
-        $periods = $this->getHarvestablePeriods($now, $this->getLastHarvestedAt());
+        $periods = $this->getHarvestablePeriods($now);
         if ($periods > self::MAX_PERIODS) {
             $periods = self::MAX_PERIODS;
         }
@@ -40,12 +41,18 @@ class Resource extends Model
         return floor(($periods * $this->type->base_harvest_amount) * $this->getDrMultiplier());
     } // end getProtectedHarvestAmount
 
-    private function getHarvestablePeriods(Carbon $now = null, Carbon $then)
+    public function getHarvestablePeriods(Carbon $now = null)
     {
         $now = $now ?? Carbon::now();
 
-        $time_diff = $now->diffInSeconds($this->getLastHarvestedAt());
-        return floor($time_diff / $this->type->base_harvest_interval);
+        $time_diff = $now->diffInSeconds($this->last_harvested_at);
+        $periods = (int)floor($time_diff / $this->type->base_harvest_interval);
+
+        if ($periods > self::MAX_PERIODS) {
+            $periods = self::MAX_PERIODS;
+        }
+
+        return $periods;
     } // end getPeriods
 
     /**
@@ -55,7 +62,7 @@ class Resource extends Model
      */
     public function getDrMultiplier()
     {
-        $last_harvest_diff = $this->getLastHarvestedAt()->diffInSeconds($this->getPenultimateHarvestedAt());
+        $last_harvest_diff = $this->last_harvested_at->diffInSeconds($this->penultimate_harvested_at);
         $claimed_periods = $last_harvest_diff / $this->type->base_harvest_interval;
         if ($claimed_periods > self::MAX_PERIODS) {
             $claimed_periods = self::MAX_PERIODS;
@@ -66,6 +73,7 @@ class Resource extends Model
         return 1 - ($pct_of_total_periods * 0.5);
     } // end getDrMultiplier
 
+    /*
     public function getLastHarvestedAt()
     {
         return new Carbon($this->last_harvested_at);
@@ -75,6 +83,7 @@ class Resource extends Model
     {
         return new Carbon($this->penultimate_harvested_at);
     } // end getPenultimateHarvestedAt
+    */
 
     /**
      * Array representation appropriate for JSON/templates.
