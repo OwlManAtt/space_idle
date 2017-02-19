@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Services\HarvestingService;
 use \Carbon\Carbon;
 
-class HarvestingServiceTest extends ResourceBaseHelper 
+class HarvestingServiceTest extends ResourceBaseHelper
 {
     protected $now;
     protected $type;
@@ -40,14 +40,13 @@ class HarvestingServiceTest extends ResourceBaseHelper
     {
         $period_ago = $this->now->copy()->subSeconds($this->type->base_harvest_interval + 1);
         $resource = $this->mockResource([
-            'last_harvested_at' => $period_ago, 
-            'type' => $this->type, 
-            'quantity' => 50, 
+            'last_harvested_at' => $period_ago,
+            'type' => $this->type,
+            'quantity' => 50,
         ]);
         $expected_addition = $resource->getProjectedHarvestAmount($this->now);
         $results = $this->service->doHarvest([clone $resource], $this->now);
 
         $this->assertEquals($resource->quantity + $resource->getProjectedHarvestAmount(), $results[0]->quantity);
-    } // end testOnePeriodHarvest 
-
+    } // end testOnePeriodHarvest
 } // end UserTest

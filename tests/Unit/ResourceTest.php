@@ -6,7 +6,7 @@ use Mockery as m;
 use App\Models\Resource;
 use \Carbon\Carbon;
 
-class ResourceTest extends ResourceBaseHelper 
+class ResourceTest extends ResourceBaseHelper
 {
     public function testHarvestablePeriods()
     {
@@ -41,5 +41,4 @@ class ResourceTest extends ResourceBaseHelper
         $resource = $this->mockResource(['last_harvested_at' => $period_ago, 'type' => $type]);
         $this->assertEquals(true, $resource->isHarvestable($now));
     } // end testIsHarvestable
-
 } // end UserTest

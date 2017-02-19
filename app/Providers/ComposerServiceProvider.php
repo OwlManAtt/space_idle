@@ -9,7 +9,8 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(
-            'layout.chrome', \App\Http\ViewComposers\NavComposer::class
+            'layout.chrome',
+            \App\Http\ViewComposers\NavComposer::class
         );
     } // end boot
 

@@ -34,5 +34,4 @@ abstract class ResourceBaseHelper extends TestCase
         // Migration loads seeds for this table
         return ResourceType::where('short_code', $short_code)->first();
     }
-
 } // end ResourceBaseHelper
