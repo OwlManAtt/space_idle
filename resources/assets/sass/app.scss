@@ -17,6 +17,17 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
     max-height: 15px;
 }
 
+.content-container {
+    border: 1px solid 1px solid rgba(0,0,0,.6);
+    border-radius: 6px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-bottom: 30px;
+    background-color: #1c1e22;
+}
+
 footer li {
     float: left;
     margin-right: 1.5em;
