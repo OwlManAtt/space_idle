@@ -8,21 +8,44 @@
 <table class="table table-striped table-hover ">
     <thead>
         <tr>
-            <th>&nbsp;</th>
-            <th>Resource</th>
+            <th colspan='2'>Resource</th>
             <th>In Storage</th>
+            <th>Projected Harvest</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($resources as $resource)
         <tr>
-            <td><img src='{{ $resource->type->icon }}'></td>
-            <td>{{ $resource->type->name }}</td>
-            <td>{{ $resource->quantity }}</td>
-            <td><input type='button' value='Harvest' disabled></td>
+            <td><img src='{{ $resource['icon'] }}'></td>
+            <td>
+                <p class='lead'>{{ $resource['name'] }}</p>
+                <p>{{ $resource['description'] }}</p>
+            </td>
+            <td>{{ $resource['quantity_stored']}}</td>
+            <td>{{ $resource['projected_harvest'] }}</td>
+            <td>
+                <form action='/harvest/resource' method='post'>
+
+                    {{ csrf_field() }}
+                    <input type='hidden' name='resources[]' value='{{ $resource['short_code'] }}'>
+                    <input type='submit' class='btn btn-primary' value='Harvest' {{ !$resource['harvestable'] ? 'disabled' : '' }}>
+                </form>
+                DR = {{ $resource['diminishing_return_modifier'] }}
+            </td>
         </tr>
         @endforeach
+        <tr>
+            <td colspan='4'>&nbsp;</td>
+            <td>
+                <form action='/harvest/resource' method='post'>
+                    {{ csrf_field() }}
+                    <input type='hidden' name='resources'>
+                    <input type='submit' class='btn btn-primary' value='Harvest All' {{ !$enable_all_btn ? 'disabled' : '' }}>
+                </form>
+
+            </td>
+        </tr>
     </tbody>
 </table>
 @endsection

@@ -5,6 +5,7 @@ use App\Repositories\BaseRepository;
 use Carbon\Carbon;
 use App\Models\Resource;
 use App\Models\ResourceType;
+use Illuminate\Support\Facades\DB;
 
 class ResourceRepository extends BaseRepository
 {
@@ -24,4 +25,13 @@ class ResourceRepository extends BaseRepository
 
         return $resources;
     } // end getInitialResources
+
+    public static function updateResources($resources)
+    {
+        return DB::transaction(function () use ($resources) {
+            $resources->map(function ($res) {
+                $res->save();
+            });
+        });
+    } // end updateResources
 } // end User
